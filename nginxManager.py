@@ -25,7 +25,7 @@ def updateIPOfBackendService(port):
         hasChanged = rawText.find(ip) == -1 # return -1 if they are different.
         if hasChanged:
             print("the IP has changed.")
-            target = 'upstream '+config['upstream']+' {[\n_a-zA-Z_0-9-.:; ]*\n}'
+            target = 'upstream '+config['upstream']+' {[\n_a-zA-Z_0-9-.:;# ]*\n}'
             result = 'upstream '+config['upstream']+' {\n    server '+ip+':'+port+';\n}'
             updatedText = re.sub(target, result, rawText)
             print('relace test:', updatedText)

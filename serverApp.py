@@ -5,9 +5,8 @@ import networkManagerFirebasePlugin
 import threading
 import nginxManager
 secs=600.0
-ip=''
 
-def UpdateIP(ip):
+def UpdateIP():
     k8s_api_server_port = "8080"
     needUpdate = nginxManager.updateIPOfBackendService(k8s_api_server_port)
     if ~needUpdate:
@@ -15,18 +14,16 @@ def UpdateIP(ip):
     else:
         config = init.config
         email = config['email']
-        ip = current_ip
         mailManager.sendEmail(email, email, "your backend IP has updated.", ip)
-        networkManagerFirebasePlugin.updateIP()
-        threading.Timer(secs, loop, [secs, ip]).start()
+        threading.Timer(secs, loop, [secs]).start()
         print("your backend IP has updated.", ip)
         nginxManager.restartNginx()
     return needUpdate
 
-def loop(secs, ip):
+def loop(secs):
     print("Current Time: ", init.logManager.getTimestamp())   
     ip = networkManagerFirebasePlugin.getIPfromFirebase()
-    UpdateIP(ip)
+    UpdateIP()
 
 networkManagerFirebasePlugin.initApp()
-loop(secs, ip)
+loop(secs)
