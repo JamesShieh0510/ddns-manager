@@ -35,5 +35,5 @@ def updateIPOfBackendService(port):
             fp.close
         else:
             print("the IP hasn't changed.")
-    return hasChanged
+        return hasChanged
 
