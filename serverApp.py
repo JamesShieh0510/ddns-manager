@@ -12,9 +12,10 @@ def UpdateIP():
     if not needUpdate:
         print('your nginx config hasn\'t changed:')
     else:
+        ip = networkManagerFirebasePlugin.getIPfromFirebase()
         config = init.config
         email = config['email']
-        mailManager.sendEmail(email, email, "your backend IP has updated.")
+        mailManager.sendEmail(email, email, "your backend IP has updated.", ip)
         threading.Timer(secs, loop, [secs]).start()
         print("your backend IP has updated.", ip)
         nginxManager.restartNginx()
