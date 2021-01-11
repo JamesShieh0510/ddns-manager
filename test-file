@@ -1,0 +1,28 @@
+upstream edge01_backend {
+    server 61.230.24.130:8080;
+}
+
+server {
+
+    server_name edge-01.imrc.be;
+
+    location / {
+            proxy_pass https://edge01_backend;
+            proxy_set_header   Host    $http_host;
+            proxy_set_header   X-Real-IP   $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+            #try_files $uri $uri/ =404;
+            #try_files $uri $uri/ /?$query_string;
+
+    }
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/edge-01.imrc.be/fullchain.pem; # mana$
+    ssl_certificate_key /etc/letsencrypt/live/edge-01.imrc.be/privkey.pem; # ma$
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+    
