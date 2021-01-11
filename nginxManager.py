@@ -14,7 +14,7 @@ import subprocess
 def restartNginx():
     config = init.config
     sh_file = '/home/'+config['python_user']+'/restart-nginx-service.sh'
-    subprocess.call(['.', sh_file])
+    subprocess.call(['sh', sh_file])
 
 
 def updateIPOfBackendService(port):

@@ -3,9 +3,9 @@ sudo apt install python-pip
 sudo pip install requests
 pip install firebase_admin
 export python_user=$(whoami)
-echo 'service nginx restart' > /home/$python_user/restart-nginx-service.sh
+echo 'sudo service nginx restart' > /home/$python_user/restart-nginx-service.sh
 sudo chown root:root /home/$python_user/restart-nginx-service.sh
-sudo chmod 700 /home/$python_user/restart-nginx-service.sh
+sudo chmod 705 /home/$python_user/restart-nginx-service.sh
 
 nginx_config=$(cat config.json | grep nginx_config_file | awk '{print $2}' | sed -e "s/[,\"]//g")
 export nginx_config_path=$nginx_config
