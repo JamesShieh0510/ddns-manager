@@ -35,8 +35,6 @@ def updateIPOfBackendService(port):
             fp.close
         else:
             print("the IP hasn't changed.")
+    return hasChanged
 networkManagerFirebasePlugin.initApp() # need to remove
 
-k8s_api_server_port = "8080"
-updateIPOfBackendService(k8s_api_server_port)
-restart_nginx();
