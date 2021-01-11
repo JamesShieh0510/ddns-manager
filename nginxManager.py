@@ -36,5 +36,4 @@ def updateIPOfBackendService(port):
         else:
             print("the IP hasn't changed.")
     return hasChanged
-networkManagerFirebasePlugin.initApp() # need to remove
 
