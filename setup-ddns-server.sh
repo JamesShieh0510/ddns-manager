@@ -14,3 +14,8 @@ sudo chmod 707 $nginx_config
 su root
 sudo echo "$python_user  ALL=(ALL) NOPASSWD: /home/$python_user/restart-nginx-service.sh" >> /etc/sudoers
 sudo echo "$python_user  ALL=(ALL) NOPASSWD: $nginx_config_path" >> /etc/sudoers
+
+mkdir /root/ddns-manager
+cp ./* /root/ddns-manager/
+echo "@reboot     root    cd /root/ddns-manager/;python serverCronJob.py" >> /etc/crontab
+echo "*/5 * * * *     root    cd /root/ddns-manager/;python serverCronJob.py" >> /etc/crontab
