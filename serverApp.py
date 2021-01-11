@@ -10,7 +10,7 @@ def UpdateIP():
     k8s_api_server_port = "8080"
     needUpdate = nginxManager.updateIPOfBackendService(k8s_api_server_port)
     if ~needUpdate:
-        print('your ip hasn\'t changed:', ip)
+        print('your ip hasn\'t changed:')
     else:
         config = init.config
         email = config['email']
