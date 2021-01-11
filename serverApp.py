@@ -9,7 +9,6 @@ ip=''
 
 def UpdateIP(ip):
     k8s_api_server_port = "8080"
-    restart_nginx();
     needUpdate = nginxManager.updateIPOfBackendService(k8s_api_server_port)
     if ~needUpdate:
         print('your ip hasn\'t changed:', ip)
@@ -21,7 +20,7 @@ def UpdateIP(ip):
         networkManagerFirebasePlugin.updateIP()
         threading.Timer(secs, loop, [secs, ip]).start()
         print("your backend IP has updated.", ip)
-        nginxManager.restart_nginx()
+        nginxManager.restartNginx()
     return needUpdate
 
 def loop(secs, ip):

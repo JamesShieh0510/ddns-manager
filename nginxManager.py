@@ -11,7 +11,7 @@ import subprocess
 # }
 #
 # restart nginx service
-def restart_nginx():
+def restartNginx():
     config = init.config
     sh_file = '/home/'+config['python_user']+'/restart-nginx-service.sh'
     subprocess.call(['.', sh_file])
