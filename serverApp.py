@@ -9,7 +9,7 @@ secs=600.0
 def UpdateIP():
     k8s_api_server_port = "8080"
     needUpdate = nginxManager.updateIPOfBackendService(k8s_api_server_port)
-    if ~needUpdate:
+    if !needUpdate:
         print('your nginx config hasn\'t changed:')
     else:
         config = init.config
